@@ -2,9 +2,17 @@
 
 
 <img src = "https://user-images.githubusercontent.com/46704901/193746849-a07850e0-addb-4672-86da-bc1db82c7f01.jpg" width="200"> <img src = "https://user-images.githubusercontent.com/46704901/193746890-a3acf38e-2796-4cac-a9fb-66b13ff3ca1a.jpg" width="200"> <img src = "https://user-images.githubusercontent.com/46704901/193746950-173991b4-e029-4340-be1d-bbad3332703d.jpg" width="200"> <img src = "https://user-images.githubusercontent.com/46704901/193746962-c36536c6-a792-4c65-b688-b8b1d9b01f1c.jpg" width="200">
+<br>
+<br>
 
-An Attendance Tracking App to track your daily attendance and never miss on that 75% average
 
+## About the project
+
+AtClass is a an app that helps you to track and manage your daily attendance, be it for your ongoing current semester, your school etc.
+It helps you to never miss on that 75% mark of average attendance your teacher criticizes you for. You can easily take a stay back at home without
+worrying for your 75% average percentage as per the current UGC or AICTE norms laid back
+
+AtClass is under build process🔨🛠. If you wish to contribute to build a product of excellence clone this repository and follow the [Installation](https://github.com/Sauvikn98/AtClass/blob/main/README.md#installation) steps.
 
 
 ## Installation
@@ -20,7 +28,7 @@ It will install the required dependencies for the project.
 
 3) Set up firebase for your react-native app using this [link](https://console.firebase.google.com/)
 
-4) Create a keys.js file in the src/Firebase directory. Put your firebase keys inside the file.
+4) Download google-services.json file and store it in the ``` android/app/ ``` folder
 
 5) To run the app on an android device or emulator, go to the root directory and run:
 
@@ -28,15 +36,50 @@ It will install the required dependencies for the project.
 > npx react-native run-android
 ```
 
+## Release
 
-## About the project
+1. Generating an upload key using ``` keytool -genkeypair -v -storetype PKCS12 -keystore my-upload-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000 ```
+2. Setting up Gradle Variables-
+      a) Place the  ```my-upload-key.keystore``` file under the ```android/app``` directory in your project folder.
+      b) Edit the file ```~/.gradle/gradle.properties``` or ```android/gradle.properties```, and add the following (replace ***** with the correct keystore password,  alias and key password)
+      
+      ```
+      MYAPP_UPLOAD_STORE_FILE=my-upload-key.keystore
+      MYAPP_UPLOAD_KEY_ALIAS=my-key-alias
+      MYAPP_UPLOAD_STORE_PASSWORD=*****
+      MYAPP_UPLOAD_KEY_PASSWORD=*****
+      ```
+3. Adding signing config to your app's Gradle config
+   ```
+   ...
+    android {
+       ...
+       defaultConfig { ... }
+       signingConfigs {
+           release {
+               if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
+                   storeFile file(MYAPP_UPLOAD_STORE_FILE)
+                   storePassword MYAPP_UPLOAD_STORE_PASSWORD
+                   keyAlias MYAPP_UPLOAD_KEY_ALIAS
+                   keyPassword MYAPP_UPLOAD_KEY_PASSWORD
+               }
+           }
+       }
+       buildTypes {
+           release {
+               ...
+               signingConfig signingConfigs.release
+            }
+        }
+    }
+   ...
+   ```
+4. Generating the release AAB
 
-AtClass is a an app that helps you to track and manage your daily attendance, be it for your ongoing current semester, your school etc.
-It helps you to never miss on that 75% mark of average attendance your teacher criticizes you for. You can easily take a stay back at home without
-worrying for your 75% average percentage as per the current UGC or AICTE norms laid back
-
-AtClass is under build process🔨🛠. If you wish to contribute to build a product of excellence clone this repository and follow the [Installation](https://github.com/Sauvikn98/AtClass/blob/main/README.md#installation) steps.
-
+    ```
+    cd android
+    ./gradlew bundleRelease
+    ```
 
 ### Here is a list of features that Atclass is providing:
 
