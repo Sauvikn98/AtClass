@@ -78,7 +78,7 @@ It will install the required dependencies for the project.
 
     ```
     cd android
-    ./gradlew bundleRelease
+    ./gradlew assembleRelease
     ```
 
 ### Here is a list of features that Atclass is providing:
