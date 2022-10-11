@@ -88,13 +88,13 @@ class SignUpForm extends Component {
 							}}
 						/>
 					</View>
-					<View style={styles.errorView}>{this.renderError()}</View>
-					<View style={buttonWrap}>{this.renderButton()}</View>
-					<View style={{justifyContent:"center", alignItems:"center", marginBottom:90, flex:1}}>
+					<View style={{justifyContent:"center", alignItems:"center", marginTop:60}}>
 						<TouchableOpacity onPress={()=> Actions.signin()}>
-							<Text style={{fontSize:18,color:"#333"}}>Have an account? Login</Text>
+							<Text style={{fontSize:18,color:"#333"}}>Have an Account? Sign In</Text>
 						</TouchableOpacity>
 					</View>
+					<View style={buttonWrap}>{this.renderButton()}</View>
+					<View style={styles.errorView}>{this.renderError()}</View>
 				</View>
 			</View>
 		);
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
 		width: '100%',
 		marginTop: 20
 	},
-	buttonWrap: { flex: 1, marginTop: 20 },
+	buttonWrap: {  marginTop: 20 },
 	subView: { flex: 1, marginTop: 15 }
 });
 
