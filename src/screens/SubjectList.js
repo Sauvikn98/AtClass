@@ -43,7 +43,7 @@ class SubjectList extends Component {
 	renderSubjects = ({ item }) => (
 		<TouchableWithoutFeedback
 			onPress={() => {
-				Actions.mainSubject({ subject: item });
+				this.props.navigation.navigate('Subject Main')
 			}}
 		>
 			<View style={styles.postCard}>
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
 		marginRight: 10,
 		marginTop: 0.5,
 		marginBottom: 10,
-		borderRadius: 3
+		borderRadius: 3,
 	},
 	postHeader: {
 		padding: 18,
